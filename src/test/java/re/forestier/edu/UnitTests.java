@@ -11,8 +11,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -110,6 +113,13 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 20); // 10 <= xp < 27
         assertThat(p.retrieveLevel(), is(2));
     }
+    @Test
+    @DisplayName("Mutation pour le level 2")
+    void testLevelTwo1() {
+        player p = new player("Diana", "Ranger", "ADVENTURER", 100, new ArrayList<>());
+        UpdatePlayer.addXp(p, 27); // 10 <= xp < 27
+        assertThat(p.retrieveLevel(), is(3));
+    }
 
     @Test
     @DisplayName("Player level should be 3 when xp is between 27 and 56")
@@ -118,6 +128,14 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 40); // 27 <= xp < 57
         assertThat(p.retrieveLevel(), is(3));
     }
+    @Test
+    @DisplayName("Mutation du level 3")
+    void testLevelThree1() {
+        player p = new player("Diana", "Ranger", "ADVENTURER", 100, new ArrayList<>());
+        UpdatePlayer.addXp(p, 57); // 27 <= xp < 57
+        assertThat(p.retrieveLevel(), is(4));
+    }
+    
 
     @Test
     @DisplayName("Player level should be 4 when xp is between 57 and 110")
@@ -125,6 +143,13 @@ public class UnitTests {
         player p = new player("Diana", "Ranger", "ADVENTURER", 100, new ArrayList<>());
         UpdatePlayer.addXp(p, 75); // 57 <= xp < 111
         assertThat(p.retrieveLevel(), is(4));
+    }
+    @Test
+    @DisplayName("Mutation du level 4")
+    void testLevelFour1() {
+        player p = new player("Diana", "Ranger", "ADVENTURER", 100, new ArrayList<>());
+        UpdatePlayer.addXp(p, 111); // 57 <= xp < 111
+        assertThat(p.retrieveLevel(), is(5));
     }
 
     @Test
@@ -152,6 +177,24 @@ public class UnitTests {
         // Pas de changement attendu, le joueur est KO
         assertThat(p.currenthealthpoints, is(0));
     }
+    
+    @Test
+    @DisplayName("Mutation joueur KO (currenthealthpoints == 0)")
+    void testJoueurKO() {
+        player p = new player("Jean", "Guerrier", "DWARF", 100, new ArrayList<>());
+        p.currenthealthpoints = 0;
+        
+        // Rediriger la sortie standard pour capturer le message affiché
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        UpdatePlayer.majFinDeTour(p);
+        
+        // Vérifier que le message "Le joueur est KO !" a été affiché
+        assertTrue(outContent.toString().contains("Le joueur est KO !"));
+        
+    }
+
+
 
     @Test
     @DisplayName("Test récupération de points de vie pour DWARF avec Elixir sacré")
