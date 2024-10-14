@@ -5,9 +5,12 @@ import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.player;
+
+import static org.approvaltests.Approvals.verify;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
@@ -51,6 +54,16 @@ public class UnitTests {
         assertThat(p.money, is(50));
     }
 
+    @Test 
+    @DisplayName("Mutation pour remove money: essaie d'enlever toute la somme possédée(le cas du < ou =)")
+    void mutationRemoveMoney1(){
+        player p = new player("Alice", "Mage", "ADVENTURER", 100, new ArrayList<>());
+        p.removeMoney(100);
+        assertThat(p.money, is(0));
+    }
+    
+
+
     @Test
     @DisplayName("Test getting XP from player")
     void testGetXp() {
@@ -80,6 +93,14 @@ public class UnitTests {
         player p = new player("Diana", "Ranger", "ADVENTURER", 100, new ArrayList<>());
         UpdatePlayer.addXp(p, 5); // xp < 10
         assertThat(p.retrieveLevel(), is(1));
+    }
+
+    @Test
+    @DisplayName("Player level should be 1 when xp is less than 10")
+    void testLevelOne1() {
+        player p = new player("Diana", "Ranger", "ADVENTURER", 100, new ArrayList<>());
+        UpdatePlayer.addXp(p, 10); 
+        assertThat(p.retrieveLevel(), is(2));
     }
 
     @Test
@@ -268,6 +289,23 @@ public class UnitTests {
 
 
 //AFFICHAGE
+
+@Test
+void testAffichage(){
+    player player = new player("Jean", "Guerrier", "ADVENTURER", 100, new ArrayList<>());
+    UpdatePlayer.addXp(player, 20);
+    player.inventory=new ArrayList<>();
+    // verify(Affichage.afficherJoueur(player));
+    player.inventory.add("potion de santé");
+    player.inventory.add("Epee");
+    player.inventory.add("Bouclier");
+    UpdatePlayer.addXp(player, 20);
+    String result=Affichage.afficherJoueur(player);
+    assertThat(result, containsString("potion de santé"));
+    assertThat(result, containsString("Epee"));
+    assertThat(result, containsString("Bouclier"));
+
+}
 
     
 

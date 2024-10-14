@@ -17,3 +17,7 @@ public class Affichage {
         return finalString[0];
     }
 }
+
+
+
+
