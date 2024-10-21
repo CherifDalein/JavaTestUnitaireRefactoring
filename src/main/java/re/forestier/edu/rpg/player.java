@@ -9,7 +9,7 @@ public class player {
     private String AvatarClass;
 
     public Integer money;
-    private Float __real_money__;
+    // private Float __real_money__;
 
 
     public int level;
