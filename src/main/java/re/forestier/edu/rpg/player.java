@@ -41,8 +41,8 @@ public class player {
         money = Integer.parseInt(money.toString()) - amount;
     }
     public void addMoney(int amount) {
-        var value = Integer.valueOf(amount);
-        money = money + (value != null ? value : 0);
+        // var value = Integer.valueOf(amount);
+        money = money + amount;
     }
     public int retrieveLevel() {
         // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
