@@ -134,9 +134,10 @@ public class UpdatePlayer {
                         player.currenthealthpoints+=1;
                     }
                     player.currenthealthpoints+=1;
-                } else if(player.getAvatarClass().equals("ADVENTURER")) {
-                    player.currenthealthpoints+=2;
-                }
+                } 
+                // else if(player.getAvatarClass().equals("ADVENTURER")) {
+                //     player.currenthealthpoints+=2;
+                // }
 
 
                 if(player.getAvatarClass().equals("ARCHER")) {
@@ -159,8 +160,8 @@ public class UpdatePlayer {
         }
 
 
-        if(player.currenthealthpoints >= player.healthpoints) {
-            player.currenthealthpoints = player.healthpoints;
-        }
+        // if(player.currenthealthpoints >= player.healthpoints) {
+        //     player.currenthealthpoints = player.healthpoints;
+        // }
     }
 }

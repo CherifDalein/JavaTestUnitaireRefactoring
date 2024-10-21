@@ -7,11 +7,7 @@ public class player {
     public String playerName;
     public String Avatar_name;
     private String AvatarClass;
-
     public Integer money;
-    // private Float __real_money__;
-
-
     public int level;
     public int healthpoints;
     public int currenthealthpoints;
@@ -60,28 +56,22 @@ public class player {
         if (xp < levels.get(2)) {
             return 1;
         }
-        else if (xp < levels.get(3)) {return 2;
+        else if (xp < levels.get(3)) {
+            return 2;
         }
-        if (xp < levels.get(4)) {
+        else if (xp < levels.get(4)) {
             return 3;
         }
-        if (xp < levels.get(5)) return 4;
-        return 5;
+        else if (xp < levels.get(5)){
+            return 4;
+        }
+        else{
+            return 5;
+        }
     }
 
     public int getXp() {
         return this.xp;
     }
-
-    /*
-    Ингредиенты:
-        Для теста:
-
-            250 г муки
-            125 г сливочного масла (холодное)
-            70 г сахара
-            1 яйцо
-            1 щепотка соли
-     */
 
 }
