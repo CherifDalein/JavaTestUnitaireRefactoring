@@ -53,21 +53,12 @@ public class player {
         levels.put(5,111); // 4*10 + ((5*57)/4)
         //TODO : ajouter les prochains niveaux
 
-        if (xp < levels.get(2)) {
-            return 1;
+        for (int i = 2; i <= 5; i++) {
+            if (xp < levels.get(i)) {
+                return i - 1;
+            }
         }
-        else if (xp < levels.get(3)) {
-            return 2;
-        }
-        else if (xp < levels.get(4)) {
-            return 3;
-        }
-        else if (xp < levels.get(5)){
-            return 4;
-        }
-        else{
-            return 5;
-        }
+        return 5;
     }
 
     public int getXp() {
