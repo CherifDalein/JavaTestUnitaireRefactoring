@@ -19,6 +19,9 @@ public class UpdatePlayer {
     
         // Capabilities for Dwarf
         abilitiesPerTypeAndLevel.put("DWARF", createDwarfAbilities());
+
+        // Capabilities for Gobelin
+        abilitiesPerTypeAndLevel.put("GOBELIN", createGobelinAbilities());
     
         return abilitiesPerTypeAndLevel;
     }
@@ -60,6 +63,19 @@ public class UpdatePlayer {
         dwarfMap.put(5, createAbilityMap(new String[]{"CHA"}, new int[]{1}));
     
         return dwarfMap;
+    }
+
+    // Helper method to create Dwarf abilities
+    private static HashMap<Integer, HashMap<String, Integer>> createGobelinAbilities() {
+        HashMap<Integer, HashMap<String, Integer>> gobelinMap = new HashMap<>();
+    
+        gobelinMap.put(1, createAbilityMap(new String[]{"INT", "ATK", "ALC"}, new int[]{2, 2, 1}));
+        gobelinMap.put(2, createAbilityMap(new String[]{"ATK", "ALC"}, new int[]{3, 4}));
+        gobelinMap.put(3, createAbilityMap(new String[]{"VIS"}, new int[]{1}));
+        gobelinMap.put(4, createAbilityMap(new String[]{"DEF"}, new int[]{1}));
+        gobelinMap.put(5, createAbilityMap(new String[]{"DEF", "ATK"}, new int[]{2, 4}));
+    
+        return gobelinMap;
     }
     
     // Helper method to create the ability map for a given level

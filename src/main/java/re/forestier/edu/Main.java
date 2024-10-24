@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        player firstPlayer = new player("Florian", "Ruzberg de Rivehaute", "ADVENTURER", 200, new ArrayList<>());
+        player firstPlayer = new player("Florian", "Ruzberg de Rivehaute", "GOBELIN", 200, new ArrayList<>());
         firstPlayer.addMoney(400);
 
         UpdatePlayer.addXp(firstPlayer, 15);
