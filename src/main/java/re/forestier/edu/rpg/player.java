@@ -42,7 +42,7 @@ public class player {
     }
     public void addMoney(int amount) {
         // var value = Integer.valueOf(amount);
-        money = money + amount;
+        money += amount;
     }
     public int retrieveLevel() {
         // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
