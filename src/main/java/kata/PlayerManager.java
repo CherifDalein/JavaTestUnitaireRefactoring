@@ -10,6 +10,17 @@ public class PlayerManager {
         ages[playerCount] = age;
         playerCount++;
     }
+    public String getPlayerName(int index) {
+        return playerNames[index];
+    }
+
+    public int getPlayerAge(int index) {
+        return ages[index];
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
 
     public String getPlayerDetails(String name) {
         for (int i = 0; i < playerCount; i++) {
