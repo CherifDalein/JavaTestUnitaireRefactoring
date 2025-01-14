@@ -1,105 +1,70 @@
-# Correctif - machine ISIMA
+# Kata : Gestionnaire de joueurs de football
 
-Sur les machines ISIMA, vous **devez** :
+Bienvenue dans ce Kata ! Ce projet est conçu pour améliorer vos compétences en refactoring, tests unitaires, et ajout de nouvelles fonctionnalités à un code existant.
 
-* Ouvrir un terminal
-* Taper la commande suivante : `echo "JAVA_HOME=/usr/lib/jvm/jdk-21.0.4-oracle-x64" >> ~/.bashrc`
-* Fermer le terminal (et vous pouvez ensuite ouvrir à nouveau des terminaux sur votre VSCode ou autre)
+## Objectif
+Votre mission est de refactorer un code mal structuré, d’écrire des tests unitaires et de couvrir le code à 100% avec JaCoCo. Ensuite, vous ajouterez de nouvelles fonctionnalités tout en appliquant les principes de génie logiciel.
 
+---
 
-# M1 - Kata
+## Instructions
 
-## RPG Player Manager
+### 1. **Tests unitaires**
 
-Bienvenue sur RPG Player Manager, un superbe projet rédigé en Java... Enfin ça, c'est que vous a dit le client avant de
-vous envoyer le code source.
+- **Créer des tests pour chaque action :**
+  - Ajouter un joueur (`add`).
+  - Supprimer un joueur (`remove`).
+  - Calculer la performance d'un joueur (`calculate`).
+  - Afficher les détails des joueurs (`show`).
 
-### Partie 1 - Tests unitaires
+- **Couvrir 100% du code avec JaCoCo.**
 
-En effet, le code de ce projet est moche, complexe, et surtout, moche. Et félicitations, vous devez coder une nouvelle
-fonctionnalité à l'intérieur !
+### 2. **Refactoring**
 
-Avant de pouvoir implémenter la nouvelle fonctionnalité (qui sera décrite plus tard), vous allez en premier lieu vous
-assurer de ne rien casser. Pour cela, vous allez devoir :
+- **Séparer les responsabilités** en plusieurs classes, telles que :
+  - `Player`
+  - `TeamManager`
 
-* Comprendre le code actuel (prenez des notes sur les règles métier, ça vous aidera) ;
-* Rédiger des tests unitaires et globaux pour vous assurer que tout fonctionne correctement ;
-* Le tout, sans toucher le code actuel.
+- **Utiliser des noms explicites** pour les méthodes et variables.
 
-JaCoCo et PIT seront vos amis (+ de détails dans le sujet de TP).
+- **Remplacer les tableaux** (ex. : `Object[]`) par des structures de données plus adaptées, comme des objets ou des collections.
 
-Attention, le client vous informe que pour une raison inconnue, le passage de l'aventurier au niveau 2 ne fonctionne
-pas... Mais le niveau 3, 4 et 5, eux, fonctionnent.
+### 3. **Ajout de fonctionnalités**
 
-Rédigez des tests unitaires et globaux de manière que JaCoCo vous indique 100% de code coverage. Des exemples vous
-sont fournis dans `src/test/java/re.forestier.re`.
+- **Classement des joueurs :**
+  - Ajouter une fonctionnalité pour trier et afficher les joueurs en fonction de leur score.
 
-Durant cette phase, il est **strictement interdit** de toucher au code source !
+- **Exportation JSON :**
+  - Permettre l’exportation des données des joueurs au format JSON.
 
-### Partie 2 - Refactoring
+### 4. **Questions de réflexion**
 
-Durant la phase de refactoring, vous êtes libres de toucher à ce que vous voulez dans le programme ! N'oubliez pas de
-régulièrement commiter votre travail pour éviter de vous retrouver perdu dans un refactoring impossible...
+- **Pourquoi les tests sont-ils nécessaires avant de refactorer ?**
+  - Discuter de l’importance de protéger les fonctionnalités existantes grâce aux tests.
 
-L'objectif : rendre propre le code actuel sans casser vos tests actuels ! Dans cette phase, il est **strictement
-interdit** de toucher aux tests !
+- **Quels principes de génie logiciel sont appliqués pendant le refactoring ?**
+  - Expliquer comment le principe de responsabilité unique (SRP) et d'autres concepts sont utilisés.
 
-Quelques pistes :
+---
 
-* Réduire la complexité cognitive ;
-* Améliorer le système d'affichage, par exemple avec FreeMarker ou un StringBuilder (FreeMarker sera plus approprié) ;
-* Est-il cohérent d'avoir ces trois classes dans `re.forestier.re.rpg` ? (probablement un redécoupage à faire) ;
-* Consistence dans le code ;
-* Gérer correctement les erreurs ;
-* Utiliser des énumérations, regarder si les structures sont bien adaptées, etc.
+## Déroulement
 
-N'hésitez pas à demander à votre chargé de TP des conseils au fur et à mesure.
+1. **Cloner le projet** : Téléchargez le code source initial et ouvrez-le dans votre IDE.
+2. **Analyser le code** : Identifiez les parties du code mal structurées.
+3. **Écrire des tests unitaires** : Utilisez JUnit ou un autre framework pour tester chaque méthode.
+4. **Refactorer** : Organisez le code en suivant les bonnes pratiques.
+5. **Ajouter des fonctionnalités** : Implémentez le classement et l’exportation JSON.
+6. **Vérifier la couverture de code** : Utilisez JaCoCo pour vous assurer que toutes les branches du code sont couvertes.
 
-Note : Durant cette phase, vous pouvez en profiter pour corriger le bug de l'aventurier niveau 2...
+---
 
-### Partie 3 - Ajouter les nouvelles fonctionnalités
+## Outils requis
 
-En vous donnant le projet, le client vous a demandé d'implémenter de nouvelles fonctionnalités :
+- **Java 11+**
+- **JUnit** pour les tests unitaires.
+- **JaCoCo** pour mesurer la couverture du code.
+- **Jackson (ou Gson)** pour la gestion JSON.
 
-#### Ajout d'un nouveau rôle de joueur : Gobelin (`GOBLIN` en anglais) :
+---
 
-- Niveau 1 :
-    - `INT` = 2
-    - `ATK` = 2
-    - `ALC` = 1
-- Niveau 2 :
-    - `ATF` = 3
-    - `ALC` = 4
-- Niveau 3 :
-    - `VIS` = 1
-- Niveau 4 :
-    - `DEF` = 1
-- Niveau 5 :
-    - `DEF` = 2
-    - `ATK` = 3
-
-#### Améliorer la gestion des objets :
-
-Actuellement, un objet, c'est une simple chaîne de caractères. L'idée est d'en faire un vrai objet, disposant :
-
-- D'un nom ;
-- D'une description ;
-- D'un poids ;
-- D'une valeur.
-- Il sera possible pour un joueur de vendre un objet de son inventaire (prévoir une méthode `sell()`).
-- Par ailleurs, le joueur a désormais un poids max qu'il peut porter. Si un joueur ajoute un objet à son inventaire qui
-  fait dépasser le poids maximal, l'opération échoue.
-
-Lors de l'ajout de ces fonctionnalités, vous penserez à créer les tests nécessaires.
-
-#### Ajouter une nouvelle méthode d'affichage :
-
-Actuellement, il est uniquement possible d'avoir le détail d'un joueur dans un affichage textuel. Le client souhaiterait
-que vous ajoutiez un affichage complémentaire en Markdown. Markdown est un moyen simple de formater du texte. Voici
-quelques règles de Markdown :
-
-* `#` permet de créer un titre, `##` un sous-titre, et ainsi de suite ;
-* Des caractères entre `*` formate un texte *en italique* ; et `**` formate un texte **en gras** ;
-* Les listes doivent commencer par `*` au début de la ligne ;
-
-Pour découvrir davantage la syntaxe Markdown, regardez le contenu de ce fichier !
+Bonne chance et amusez-vous bien avec ce Kata !
