@@ -10,6 +10,17 @@ public class TeamManager {
         scores[playerCount] = score;
         playerCount++;
     }
+    public String[] getPlayers() {
+        return players;
+    }
+
+    public int[] getScores() {
+        return scores;
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
 
     public void removePlayer(String player) {
         for (int i = 0; i < playerCount; i++) {

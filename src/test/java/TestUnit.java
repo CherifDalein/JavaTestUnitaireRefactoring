@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import kata.PlayerManager;
+import kata.TeamManager;
 
 import org.junit.jupiter.api.DisplayName; 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,6 +57,56 @@ public class TestUnit {
         assertTrue(outContent.toString().contains("Gakpo (25 years old)"));
 
         // Restauration de la sortie standard originale
+        System.setOut(originalOut);
+    }
+    //----------------------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Test de AddPlayer")
+    void TestAddplayerTeam(){
+        TeamManager t = new TeamManager();
+        t.addPlayer("Foden", 89);
+
+        assertEquals(t.getScores()[0], 89);
+        assertEquals(t.getPlayers()[0], "Foden");
+        assertEquals(t.getPlayerCount(), 1);   
+    }
+
+    @Test
+    @DisplayName("Test de Remove Player")
+    void TestRemovePlayer(){
+        TeamManager t = new TeamManager();
+        t.addPlayer("Foden", 89);
+        t.addPlayer("CRJunior", 80);
+        t.removePlayer("Foden");
+
+        assertEquals(t.getPlayerCount(), 1);
+        assertEquals(t.getScores()[0], 80);
+        assertEquals(t.getPlayers()[0], "CRJunior");           
+    }
+
+    @Test
+    @DisplayName("Test de calculate total score")
+    void TestCalculateTotalScore(){
+        TeamManager t = new TeamManager();
+        t.addPlayer("Foden", 89);
+        t.addPlayer("CRJunior", 80);
+        t.calculateTotalScore();
+
+        assertEquals(t.calculateTotalScore(), 169);
+    }
+
+    @Test
+    @DisplayName("Test de Show Players")
+    void TestShowPlayers(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out; // Sauvegarder la sortie standard originale
+        System.setOut(new PrintStream(outContent)); // Rediriger la sortie vers outConten
+        TeamManager t = new TeamManager();
+        t.addPlayer("Foden", 89);
+        t.showPlayers();
+
+        assertTrue(outContent.toString().contains("Foden: 89"));
         System.setOut(originalOut);
     }
 }
