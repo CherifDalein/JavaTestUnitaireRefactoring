@@ -1,6 +1,7 @@
 import java.util.ArrayList; 
 import org.junit.jupiter.api.Test;
 
+import kata.GameStatistics;
 import kata.PlayerManager;
 import kata.TeamManager;
 
@@ -106,7 +107,76 @@ public class TestUnit {
         t.addPlayer("Foden", 89);
         t.showPlayers();
 
-        assertTrue(outContent.toString().contains("Foden: 89"));
+        assertTrue(outContent.toString().contains("Foden: 89")); 
+        System.setOut(originalOut);
+    }
+    //----------------------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Test de AddGame")
+    void TestAddGame(){
+        GameStatistics g = new GameStatistics();
+        g.addGame("Match 1", 2);
+
+        assertEquals(g.getScores()[0], 2);
+        assertEquals(g.getGameNames()[0], "Match 1");
+        assertEquals(g.getGameCount(), 1);   
+    }
+    @Test
+    @DisplayName("Test de TesthighestScoringGame sans match")
+    void testNoGame() {
+        GameStatistics teamManager = new GameStatistics();
+        assertEquals("No games available.", teamManager.highestScoringGame());
+    }
+
+    @Test
+    @DisplayName("Test de TesthighestScoringGame Avec 2 match de score different")
+    void TesthighestScoringGame0(){
+        GameStatistics g = new GameStatistics();
+        g.addGame("Match 1", 2);
+        g.addGame("Match 2", 3);
+
+        assertEquals(g.highestScoringGame(), "Highest Scoring Game: Match 2 with score 3");
+    }
+    @Test
+    @DisplayName("Test de highestScoringGame avec des matchs de meme score")
+    void testMultipleGamesSameScore() {
+        GameStatistics teamManager = new GameStatistics();
+        teamManager.addGame("Game B", 75);
+        teamManager.addGame("Game C", 75);
+        assertEquals("Highest Scoring Game: Game B with score 75", teamManager.highestScoringGame());
+    }
+
+    @Test
+    @DisplayName("Test de averageScore sans match")
+    void averageScore0(){
+        GameStatistics g = new GameStatistics();
+
+        assertEquals(0.0, g.averageScore());
+ 
+    }
+    @Test
+    @DisplayName("Test de averageScore avec au moins 2 match")
+    void averageScore(){
+        GameStatistics g = new GameStatistics();
+        g.addGame("Match 1", 2);
+        g.addGame("Match 2", 3);
+
+        assertEquals(g.averageScore(), 2.5);
+ 
+    }
+
+    @Test
+    @DisplayName("Test de ShowAllGames")
+    void TestShowAllGames(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out; // Sauvegarder la sortie standard originale
+        System.setOut(new PrintStream(outContent)); // Rediriger la sortie vers outConten
+        GameStatistics t = new GameStatistics();
+        t.addGame("Match 1", 5);
+        t.showAllGames();
+
+        assertTrue(outContent.toString().contains("Match 1: 5")); 
         System.setOut(originalOut);
     }
 }

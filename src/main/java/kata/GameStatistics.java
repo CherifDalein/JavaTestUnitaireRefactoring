@@ -11,6 +11,18 @@ public class GameStatistics {
         gameCount++;
     }
 
+    public String[] getGameNames() {
+        return gameNames;
+    }
+
+    public int[] getScores() {
+        return scores;
+    }
+
+    public int getGameCount() {
+        return gameCount;
+    }
+    
     public String highestScoringGame() {
         if (gameCount == 0) {
             return "No games available.";
